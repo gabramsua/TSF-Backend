@@ -53,3 +53,13 @@ CREATE TABLE `tsf`.`publico` (
   `email` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
 
+CREATE TABLE `tsf`.`sociotemporada` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `idsocio` INT NOT NULL,
+  `idtemporada`INT NOT NULL,
+  `iscuotapagada` TINYINT NULL,
+  `numsfc` INT NULL,
+  `numtsf` INT NULL,
+  `fecharenovacion` datetime DEFAULT NULL,
+  `metodopago` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));

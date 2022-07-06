@@ -11,28 +11,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.tsf.entity.PancartaDto;
-import com.example.tsf.entity.PublicoDto;
+import com.example.tsf.entity.SocioTemporadaDto;
 import com.example.tsf.exception.ResourceNotFoundException;
-import com.example.tsf.repositories.PancartaRepository;
-import com.example.tsf.services.interfaces.IPancarta;
+import com.example.tsf.repositories.SocioTemporadaRepository;
+import com.example.tsf.services.interfaces.ISocioTemporada;
 
 @Service
-public class PancartaImpl implements IPancarta{
+public class SocioTemporadaImpl implements ISocioTemporada{
 
-	private static final Log LOG = LogFactory.getLog(PancartaImpl.class);
+	private static final Log LOG = LogFactory.getLog(SocioTemporadaImpl.class);
 
 	@Autowired
-	private PancartaRepository itemRepository;
+	private SocioTemporadaRepository itemRepository;
 	
-	private String entity="Pancarta", field="id";
+	private String entity="SocioTemporada", field="id";
 	
 
     @Override
-    public PancartaDto get(Long id) {
+    public SocioTemporadaDto get(Long id) {
     	if(id <= 0) { throw new IllegalArgumentException("El id no puede ser negativo");}
 
         try {
-            PancartaDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id));
+        	SocioTemporadaDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id));
             return item;
         } catch (EntityNotFoundException e) {
             throw new EntityNotFoundException();
@@ -40,21 +40,21 @@ public class PancartaImpl implements IPancarta{
     }
 
     @Override
-    public List<PancartaDto> getAll() {
+    public List<SocioTemporadaDto> getAll() {
         return itemRepository.findAll();
     }
 
     @Override
-    public PancartaDto add(PancartaDto itemDto) {
-    	PancartaDto res = itemRepository.save(itemDto);
+    public SocioTemporadaDto add(SocioTemporadaDto itemDto) {
+    	SocioTemporadaDto res = itemRepository.save(itemDto);
         return res;
     }
 
     @Override
-    public PancartaDto update(PancartaDto itemDto) {
-        LOG.info("update "+entity+itemDto.getNombre());
+    public SocioTemporadaDto update(SocioTemporadaDto itemDto) {
+        LOG.info("update "+entity+itemDto.getTemporada());
         try{
-        	PancartaDto res = itemRepository.findById(itemDto.getId()).orElseThrow(() -> new ResourceNotFoundException(entity, field, itemDto.getId()));
+        	SocioTemporadaDto res = itemRepository.findById(itemDto.getId()).orElseThrow(() -> new ResourceNotFoundException(entity, field, itemDto.getId()));
         	itemDto.setId(res.getId());
         	return itemRepository.save(itemDto);
         } catch (NullPointerException e){
@@ -69,7 +69,7 @@ public class PancartaImpl implements IPancarta{
     public Boolean remove(Long id) {
         try{
 //        	get(id);
-        	PancartaDto item =	itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id)); 
+        	SocioTemporadaDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id)); 
             if(!item.equals(null)){
                 itemRepository.delete(item);
                 return Boolean.TRUE;
