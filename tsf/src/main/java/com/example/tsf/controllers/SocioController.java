@@ -18,42 +18,43 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.tsf.entity.PenaDto;
+import com.example.tsf.entity.SocioDto;
 import com.example.tsf.exception.ResourceNotFoundException;
-import com.example.tsf.services.interfaces.IPena;
+import com.example.tsf.services.interfaces.ISocio;
 
 @RestController
-@RequestMapping("/api/pena")
-public class PenaController {
+@RequestMapping("/api/socio")
+public class SocioController {
 
 	@Autowired
-	private IPena service;
-	private static final Log LOG = LogFactory.getLog(PenaController.class);
+	private ISocio service;
+	private static final Log LOG = LogFactory.getLog(SocioController.class);
     
     @GetMapping("/{id}")
-    public PenaDto get(
+    public SocioDto get(
             @PathVariable("id") Long id){
-        LOG.info("getPeña con id: "+id);
+        LOG.info("getSocio con id: "+id);
         return service.get(id);
     }
 
     @GetMapping
-    public List<PenaDto> getAll(){
-        LOG.info("getAllPeñas");
+    public List<SocioDto> getAll(){
+        LOG.info("getAllSocioDto");
         return service.getAll();
     }
 
     @PostMapping
-    public PenaDto save(@RequestBody PenaDto penaDto){
-        LOG.info("Guardando Peña: "+ penaDto.toString());
-        return service.add(penaDto);
+    public SocioDto save(@RequestBody SocioDto itemDto){
+        LOG.info("Guardando Socio: "+ itemDto.toString());
+        return service.add(itemDto);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     @PutMapping
-    public PenaDto updateGrupo(@RequestBody PenaDto penaDto){
-        LOG.info("Actualizando Peña: "+ penaDto);
+    public SocioDto update(@RequestBody SocioDto itemDto){
+        LOG.info("Actualizando Socio: "+ itemDto);
         try {
-        	return service.update(penaDto);
+        	return service.update(itemDto);
         } catch(ResourceNotFoundException e) {
         	throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage(), e);
         } catch (Exception e) {
