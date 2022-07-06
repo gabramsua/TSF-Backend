@@ -1,10 +1,6 @@
 package com.example.tsf.controllers;
 
 import java.util.List;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.tsf.entity.SocioDto;
-import com.example.tsf.entity.SocioTemporadaDto;
 import com.example.tsf.exception.ResourceNotFoundException;
 import com.example.tsf.services.interfaces.ISocio;
 

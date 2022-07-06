@@ -1,5 +1,6 @@
 package com.example.tsf.services.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,11 +11,16 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.tsf.entity.PenaDto;
 import com.example.tsf.entity.SocioDto;
+import com.example.tsf.entity.SocioTemporadaDto;
+import com.example.tsf.entity.TemporadaDto;
 import com.example.tsf.exception.ResourceNotFoundException;
 import com.example.tsf.repositories.SocioRepository;
+import com.example.tsf.repositories.SocioTemporadaRepository;
+import com.example.tsf.repositories.TemporadaRepository;
 import com.example.tsf.services.interfaces.ISocio;
+
+import enums.MetodoPago;
 
 @Service
 public class SocioImpl implements ISocio {
@@ -23,6 +29,10 @@ public class SocioImpl implements ISocio {
 
 	@Autowired
 	private SocioRepository itemRepository;
+	@Autowired
+	private SocioTemporadaRepository socioTemporadaRepository;
+	@Autowired
+	private TemporadaRepository temporadaRepository;
 	
 
     @Override
@@ -48,7 +58,17 @@ public class SocioImpl implements ISocio {
     @Override
     public SocioDto add(SocioDto itemDto) {
     	SocioDto res = itemRepository.save(itemDto);
-        return res;
+
+    	// Alta o Renovación => insertar en SocioTemporada
+    	SocioTemporadaDto aux = new SocioTemporadaDto();
+    	aux.setSocio(res);
+    	TemporadaDto t = temporadaRepository.findCurrentTemporada();
+    	aux.setTemporada(t);
+    	
+    	socioTemporadaRepository.save(aux);
+    	
+    	
+        return (res != null && aux != null) ? res : null;
     }
 
     @Override

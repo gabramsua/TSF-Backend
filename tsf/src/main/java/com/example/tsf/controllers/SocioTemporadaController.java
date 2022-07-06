@@ -21,6 +21,8 @@ import com.example.tsf.entity.SocioTemporadaDto;
 import com.example.tsf.exception.ResourceNotFoundException;
 import com.example.tsf.services.interfaces.ISocioTemporada;
 
+import enums.MetodoPago;
+
 @RestController
 @RequestMapping("/api/sociotemporada")
 public class SocioTemporadaController {
@@ -76,5 +78,11 @@ public class SocioTemporadaController {
 	    	LOG.info(e.getMessage());
 	    	throw new IllegalArgumentException(e.toString());
 	    }
+    }
+
+    @PostMapping("/pagar/{id}/{metodoPago}")
+    public SocioTemporadaDto pagar(@PathVariable("id") Long id, @PathVariable String metodoPago){
+        LOG.info("PAGANDO "+entity+": "+id);
+        return service.pagar(id, metodoPago);
     }
 }

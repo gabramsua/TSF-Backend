@@ -1,5 +1,7 @@
 package com.example.tsf.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import enums.MetodoPago;
 
 @Entity
 @Table(name = "Sociotemporada")
@@ -32,14 +36,27 @@ public class SocioTemporadaDto {
     private Boolean iscuotapagada;
     private Integer numsfc, numtsf;
     
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
 //    @Column(name = "metodopago")
-    private MetodoPago metodopago;
+    private String metodopago;
+    private Timestamp fecharenovacion;
     
 
     public SocioTemporadaDto() {
 	}
 
+	public SocioTemporadaDto(Long id, SocioDto socio, TemporadaDto temporada, Boolean iscuotapagada, Integer numsfc,
+			Integer numtsf, String metodopago, Timestamp fecha) {
+		super();
+		this.id = id;
+		this.socio = socio;
+		this.temporada = temporada;
+		this.iscuotapagada = iscuotapagada;
+		this.numsfc = numsfc;
+		this.numtsf = numtsf;
+		this.metodopago = metodopago;
+		this.fecharenovacion = fecha;
+	}
 
 	@Override
 	public String toString() {
@@ -108,25 +125,22 @@ public class SocioTemporadaDto {
 	}
 
 
-	public MetodoPago getMetodopago() {
+	public String getMetodopago() {
 		return metodopago;
 	}
 
 
-	public void setMetodopago(MetodoPago metodopago) {
+	public void setMetodopago(String metodopago) {
 		this.metodopago = metodopago;
 	}
 
 
-	public SocioTemporadaDto(Long id, SocioDto socio, TemporadaDto temporada, Boolean iscuotapagada, Integer numsfc,
-			Integer numtsf, MetodoPago metodopago) {
-		super();
-		this.id = id;
-		this.socio = socio;
-		this.temporada = temporada;
-		this.iscuotapagada = iscuotapagada;
-		this.numsfc = numsfc;
-		this.numtsf = numtsf;
-		this.metodopago = metodopago;
+	public Timestamp getFecha() {
+		return fecharenovacion;
+	}
+
+
+	public void setFecha(Timestamp fecha) {
+		this.fecharenovacion = fecha;
 	}
 }

@@ -1,7 +1,8 @@
 package com.example.tsf.services.impl;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -10,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.tsf.entity.PancartaDto;
 import com.example.tsf.entity.SocioTemporadaDto;
 import com.example.tsf.exception.ResourceNotFoundException;
 import com.example.tsf.repositories.SocioTemporadaRepository;
@@ -79,4 +79,23 @@ public class SocioTemporadaImpl implements ISocioTemporada{
         }
         return Boolean.FALSE;
     }
+
+    public SocioTemporadaDto pagar(Long id, String metodoPago ) {
+    	SocioTemporadaDto aux = get(id);
+
+    	aux.setIscuotapagada(true);
+    	aux.setMetodopago(metodoPago);
+        aux.setFecha(calculateCurrentTimestamp());
+    	
+    	// TODO: insertar elemento en tesoreria
+    	return itemRepository.save(aux);
+    }
+	public Timestamp calculateCurrentTimestamp() {
+    	Calendar calendar = Calendar.getInstance();
+        calendar.getTimeInMillis();
+        calendar.add(Calendar.HOUR, 2);
+        return new Timestamp(calendar.getTimeInMillis());
+	}
+    
+
 }

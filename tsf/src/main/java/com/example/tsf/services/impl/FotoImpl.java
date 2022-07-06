@@ -1,6 +1,7 @@
 package com.example.tsf.services.impl;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class FotoImpl implements IFoto {
 
 	@Autowired
 	private FotoRepository itemRepository;
-	
+
 	private String entity="Foto", field="id";
 	
 
@@ -50,7 +51,7 @@ public class FotoImpl implements IFoto {
 
     @Override
     public FotoDto add(FotoDto itemDto) {
-    	itemDto.setFecha(new Timestamp(System.currentTimeMillis()));
+    	itemDto.setFecha(calculateCurrentTimestamp());
     	FotoDto res = itemRepository.save(itemDto);
         return res;
     }
@@ -88,5 +89,12 @@ public class FotoImpl implements IFoto {
 	@Override
 	public List<FotoDto> getAllBetween(Timestamp date1, Timestamp date2) {
         return itemRepository.getFotosBetweenDates(date1, date2);
+	}
+	
+	public Timestamp calculateCurrentTimestamp() {
+    	Calendar calendar = Calendar.getInstance();
+        calendar.getTimeInMillis();
+        calendar.add(Calendar.HOUR, 2);
+        return new Timestamp(calendar.getTimeInMillis());
 	}
 }

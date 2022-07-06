@@ -1,4 +1,4 @@
-package com.example.tsf.entity;
+package enums;
 
 public enum MetodoPago {
 	EFECTIVO("Efectivo"), TARJETA("Tarjeta"), TRANSFERENCIA("Transferencia"), PREMIO_PADEL("Premio Padel"), PREMIO_BIWENGER("Biwenger");
@@ -19,7 +19,7 @@ public enum MetodoPago {
 //	   * @param word the word
 //	   * @return the metodo pago
 //	   */
-//	  public static MetodoPago convertWordToMetodoPago(String word) {
+//	  public MetodoPago convertWordToMetodoPago(String word) {
 //	    switch (word.toUpperCase()) {
 //	      case "EFECTIVO":
 //	        return EFECTIVO;
