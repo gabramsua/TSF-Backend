@@ -43,3 +43,13 @@ CREATE TABLE `tsf`.`pancarta` (
   `fotoid` INT NULL,
   PRIMARY KEY (`id`));
 ALTER TABLE bandera ADD CONSTRAINT fk_bandera_foto FOREIGN KEY (fotoid) REFERENCES Foto(id);
+
+CREATE TABLE `tsf`.`publico` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `dni` VARCHAR(45) NULL,
+  `nombre` VARCHAR(45) NULL,
+  `apellidos` VARCHAR(45) NULL,
+  `telefono` INT NULL,
+  `email` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
