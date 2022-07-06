@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.tsf.entity.PancartaDto;
+import com.example.tsf.entity.PublicoDto;
 import com.example.tsf.exception.ResourceNotFoundException;
 import com.example.tsf.repositories.PancartaRepository;
 import com.example.tsf.services.interfaces.IPancarta;
@@ -28,18 +29,14 @@ public class PancartaImpl implements IPancarta{
 
     @Override
     public PancartaDto get(Long id) {
-        if(id <= 0) { throw new IllegalArgumentException("El id no puede ser negativo");}
+    	if(id <= 0) { throw new IllegalArgumentException("El id no puede ser negativo");}
 
         try {
-            Optional<PancartaDto> item = itemRepository.findById(id);
-            if (item.isPresent()) {
-                return item.get();
-            }
-
+            PancartaDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id));
+            return item;
         } catch (EntityNotFoundException e) {
             throw new EntityNotFoundException();
         }
-        return null;
     }
 
     @Override

@@ -1,10 +1,15 @@
 package com.example.tsf.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +23,10 @@ public class TemporadaDto {
     
     private String nombre;
     private Integer precioalta, preciorenovacion;
+    
+
+    @OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
+    private Set<SocioTemporadaDto> sociotemporada = new HashSet<>();
     
     public TemporadaDto() {}
 
