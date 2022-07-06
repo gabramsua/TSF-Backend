@@ -28,3 +28,9 @@ CREATE TABLE `tsf`.`temporada` (
   `precioalta` INT NULL,
   `preciorenovacion` INT NULL,
   PRIMARY KEY (`id`));
+
+CREATE TABLE `tsf`.`foto` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  `fecha` DATETIME NULL,
+  PRIMARY KEY (`id`));
