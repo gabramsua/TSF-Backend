@@ -36,10 +36,10 @@ CREATE TABLE `tsf`.`temporada` (
   PRIMARY KEY (`id`));
 
 
-CREATE TABLE `tsf`.`bandera` (
+CREATE TABLE `tsf`.`pancarta` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `color` VARCHAR(45) NULL,
   `nombre` VARCHAR(45) NULL,
-  `idFoto` INT NULL,
+  `fotoid` INT NULL,
   PRIMARY KEY (`id`));
-ALTER TABLE bandera ADD CONSTRAINT fk_bandera_foto FOREIGN KEY (idFoto) REFERENCES Foto(id);
+ALTER TABLE bandera ADD CONSTRAINT fk_bandera_foto FOREIGN KEY (fotoid) REFERENCES Foto(id);
