@@ -76,3 +76,24 @@ CREATE TABLE `tsf`.`equipo` (
   `estadio` VARCHAR(45) NULL,
   `distancia` INT NULL,
   PRIMARY KEY (`id`));
+
+CREATE TABLE `tsf`.`viaje` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `equipoid` INT NULL,
+  `competicionid` INT NULL,
+  `cartelid` INT NULL,
+  `fecha` DATETIME NULL,
+  `precioentrada` INT NULL,
+  `isfinalizado` TINYINT NULL,
+  `resultadolocal` INT NULL,
+  `resultadovisitante` INT NULL,
+  `comentarios` MEDIUMTEXT NULL,
+  `horasalida` VARCHAR(45) NULL,
+  `horallegada` VARCHAR(45) NULL,
+  `lugarsalida` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE viaje ADD CONSTRAINT fk_viaje_equipo FOREIGN KEY (equipoid) REFERENCES Equipo(id);
+  ALTER TABLE viaje ADD CONSTRAINT fk_viaje_competicion FOREIGN KEY (competicionid) REFERENCES Competicion(id);
+  ALTER TABLE viaje ADD CONSTRAINT fk_viaje_cartel FOREIGN KEY (cartelid) REFERENCES Foto(id);
+
+

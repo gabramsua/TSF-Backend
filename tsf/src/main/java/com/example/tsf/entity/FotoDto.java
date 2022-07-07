@@ -21,8 +21,11 @@ public class FotoDto {
     
     private String nombre;
     private Timestamp fecha;
+    
     @OneToOne(mappedBy = "foto")
     private PancartaDto pancarta;
+    @OneToOne(mappedBy = "foto")
+    private ViajeDto viaje;
     
     public FotoDto() {}
 
