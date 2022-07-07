@@ -2,6 +2,7 @@ package com.example.tsf.entity;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -41,7 +42,11 @@ public class ViajeDto {
 
     @OneToMany(mappedBy = "publico", cascade = CascadeType.ALL)
     private Set<PublicoViajeDto> publicoviaje = new HashSet<>();
-    
+
+    // SpringBoot se da cuenta de que hay dos registros iguales y ya no puede ser un OneToOne
+//    @OneToOne(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "viaje")
+    private List<BusDto> bus;
 
     private Timestamp fecha;
     private Boolean isfinalizado;

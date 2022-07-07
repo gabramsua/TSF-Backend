@@ -133,3 +133,14 @@ CREATE TABLE `tsf`.`amigo` (
   PRIMARY KEY (`id`));
   ALTER TABLE amigo ADD CONSTRAINT fk_publico_amigo FOREIGN KEY (publicoid) REFERENCES Publico(id);
   ALTER TABLE amigo ADD CONSTRAINT fk_socio_amigo FOREIGN KEY (socioid) REFERENCES Socio(id);
+
+  CREATE TABLE `tsf`.`bus` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `viajeid` INT NULL,
+  `categoria` VARCHAR(45) NULL,
+  `preciobus` INT NULL,
+  `preciosocio` INT NULL,
+  `preciopublico` INT NULL,
+  `empresa` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE bus ADD CONSTRAINT fk_viaje_bus FOREIGN KEY (viajeid) REFERENCES Viaje(id);
