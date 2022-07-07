@@ -1,7 +1,5 @@
 package com.example.tsf.services.impl;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -11,30 +9,30 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.tsf.entity.SocioTemporadaDto;
+import com.example.tsf.entity.SocioViajeDto;
 import com.example.tsf.exception.ResourceNotFoundException;
-import com.example.tsf.repositories.SocioTemporadaRepository;
-import com.example.tsf.services.interfaces.ISocioTemporada;
+import com.example.tsf.repositories.SocioViajeRepository;
+import com.example.tsf.services.interfaces.ISocioViaje;
 
 import Utils.Helpers;
 
 @Service
-public class SocioTemporadaImpl implements ISocioTemporada{
+public class SocioViajeImpl implements ISocioViaje{
 
-	private static final Log LOG = LogFactory.getLog(SocioTemporadaImpl.class);
+	private static final Log LOG = LogFactory.getLog(SocioViajeImpl.class);
 
 	@Autowired
-	private SocioTemporadaRepository itemRepository;
+	private SocioViajeRepository itemRepository;
 	public Helpers helpers;
 	
-	private String entity="SocioTemporada", field="id";
+	private String entity="SocioViaje", field="id";
 	
     @Override
-    public SocioTemporadaDto get(Long id) {
+    public SocioViajeDto get(Long id) {
     	if(id <= 0) { throw new IllegalArgumentException("El id no puede ser negativo");}
 
         try {
-        	SocioTemporadaDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id));
+        	SocioViajeDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id));
             return item;
         } catch (EntityNotFoundException e) {
             throw new EntityNotFoundException();
@@ -42,21 +40,22 @@ public class SocioTemporadaImpl implements ISocioTemporada{
     }
 
     @Override
-    public List<SocioTemporadaDto> getAll() {
+    public List<SocioViajeDto> getAll() {
         return itemRepository.findAll();
     }
 
     @Override
-    public SocioTemporadaDto add(SocioTemporadaDto itemDto) {
-    	SocioTemporadaDto res = itemRepository.save(itemDto);
+    public SocioViajeDto add(SocioViajeDto itemDto) {
+    	itemDto.setFecha(helpers.calculateCurrentTimestamp());
+    	SocioViajeDto res = itemRepository.save(itemDto);
         return res;
     }
 
     @Override
-    public SocioTemporadaDto update(SocioTemporadaDto itemDto) {
-        LOG.info("update "+entity+itemDto.getTemporada());
+    public SocioViajeDto update(SocioViajeDto itemDto) {
+        LOG.info("update "+entity+itemDto);
         try{
-        	SocioTemporadaDto res = itemRepository.findById(itemDto.getId()).orElseThrow(() -> new ResourceNotFoundException(entity, field, itemDto.getId()));
+        	SocioViajeDto res = itemRepository.findById(itemDto.getId()).orElseThrow(() -> new ResourceNotFoundException(entity, field, itemDto.getId()));
         	itemDto.setId(res.getId());
         	return itemRepository.save(itemDto);
         } catch (NullPointerException e){
@@ -71,7 +70,7 @@ public class SocioTemporadaImpl implements ISocioTemporada{
     public Boolean remove(Long id) {
         try{
 //        	get(id);
-        	SocioTemporadaDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id)); 
+        	SocioViajeDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id)); 
             if(!item.equals(null)){
                 itemRepository.delete(item);
                 return Boolean.TRUE;
@@ -81,17 +80,5 @@ public class SocioTemporadaImpl implements ISocioTemporada{
         }
         return Boolean.FALSE;
     }
-
-    public SocioTemporadaDto pagar(Long id, String metodoPago ) {
-    	SocioTemporadaDto aux = get(id);
-
-    	aux.setIscuotapagada(true);
-    	aux.setMetodopago(metodoPago);
-        aux.setFecha(helpers.calculateCurrentTimestamp());
-    	
-    	// TODO: insertar elemento en tesoreria
-    	return itemRepository.save(aux);
-    }
-    
 
 }

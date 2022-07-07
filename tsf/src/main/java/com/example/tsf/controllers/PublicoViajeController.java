@@ -17,42 +17,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.tsf.entity.SocioTemporadaDto;
+import com.example.tsf.entity.PublicoViajeDto;
 import com.example.tsf.exception.ResourceNotFoundException;
-import com.example.tsf.services.interfaces.ISocioTemporada;
+import com.example.tsf.services.interfaces.IPublicoViaje;
 
 @RestController
-@RequestMapping("/api/sociotemporada")
-public class SocioTemporadaController {
+@RequestMapping("/api/publicoviaje")
+public class PublicoViajeController {
+
 
 	@Autowired
-	private ISocioTemporada service;
-	private static final Log LOG = LogFactory.getLog(SocioTemporadaController.class);
+	private IPublicoViaje service;
+	private static final Log LOG = LogFactory.getLog(PublicoViajeController.class);
 	
-	private String entity = "SocioTemporada";
+	private String entity = "PublicoViaje";
     
     @GetMapping("/{id}")
-    public SocioTemporadaDto get(
+    public PublicoViajeDto get(
             @PathVariable("id") Long id){
         LOG.info("Get "+entity+" con id: "+id);
         return service.get(id);
     }
 
     @GetMapping
-    public List<SocioTemporadaDto> getAll(){
+    public List<PublicoViajeDto> getAll(){
         LOG.info("getAll"+entity);
         return service.getAll();
     }
 
     @PostMapping
-    public SocioTemporadaDto save(@RequestBody SocioTemporadaDto itemDto){
+    public PublicoViajeDto save(@RequestBody PublicoViajeDto itemDto){
         LOG.info("Guardando "+entity+": "+itemDto.toString());
         return service.add(itemDto);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     @PutMapping
-    public SocioTemporadaDto update(@RequestBody SocioTemporadaDto itemDto){
+    public PublicoViajeDto update(@RequestBody PublicoViajeDto itemDto){
         LOG.info("Actualizando "+entity+": "+itemDto);
         try {
         	return service.update(itemDto);
@@ -76,11 +77,5 @@ public class SocioTemporadaController {
 	    	LOG.info(e.getMessage());
 	    	throw new IllegalArgumentException(e.toString());
 	    }
-    }
-
-    @PostMapping("/pagar/{id}/{metodoPago}")
-    public SocioTemporadaDto pagar(@PathVariable("id") Long id, @PathVariable String metodoPago){
-        LOG.info("PAGANDO "+entity+": "+id);
-        return service.pagar(id, metodoPago);
     }
 }

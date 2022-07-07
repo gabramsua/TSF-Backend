@@ -30,6 +30,9 @@ public class SocioDto {
 
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private Set<SocioTemporadaDto> socioTemporada;
+
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
+    private Set<SocioViajeDto> socioviaje;
     
     public SocioDto() {}
 
