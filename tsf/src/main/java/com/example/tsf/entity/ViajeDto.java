@@ -47,7 +47,13 @@ public class ViajeDto {
 //    @OneToOne(mappedBy = "viaje", cascade = CascadeType.ALL, orphanRemoval = true)
     @OneToMany(mappedBy = "viaje")
     private List<BusDto> bus;
+    
+    @OneToOne(mappedBy = "viaje")
+    private ActividadDto actividad;
 
+//    @OneToMany(mappedBy = "viaje", cascade = CascadeType.ALL)
+//    private Set<SocioBanderaDto> sociobandera = new HashSet<>();
+    
     private Timestamp fecha;
     private Boolean isfinalizado;
     private Integer precioentrada, resultadolocal, resultadovisitante;

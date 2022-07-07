@@ -63,6 +63,9 @@ CREATE TABLE `tsf`.`sociotemporada` (
   `fecharenovacion` datetime DEFAULT NULL,
   `metodopago` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+  ALTER TABLE sociotemporada ADD CONSTRAINT fk_socio_temporada_socio FOREIGN KEY (idsocio) REFERENCES Socio(id);
+  ALTER TABLE sociotemporada ADD CONSTRAINT fk_socio_temporada_temporada FOREIGN KEY (idtemporada) REFERENCES Temporada(id);
+
 
 CREATE TABLE `tsf`.`competicion` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -144,3 +147,40 @@ CREATE TABLE `tsf`.`amigo` (
   `empresa` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
   ALTER TABLE bus ADD CONSTRAINT fk_viaje_bus FOREIGN KEY (viajeid) REFERENCES Viaje(id);
+  
+CREATE TABLE `tsf`.`actividad` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `temporadaid` INT NULL,
+  `viajeid` INT NULL,
+  `nombre` VARCHAR(45) NULL,
+  `coste` DOUBLE NULL,
+  `preciosocio` INT NULL,
+  `preciopublico` INT NULL,
+  `fecha` DATETIME NULL,
+  `premios` MEDIUMTEXT NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE actividad ADD CONSTRAINT fk_viaje_actividad FOREIGN KEY (viajeid) REFERENCES Viaje(id);
+  ALTER TABLE actividad ADD CONSTRAINT fk_temporada_actividad FOREIGN KEY (temporadaid) REFERENCES Temporada(id);
+
+  CREATE TABLE `tsf`.`actividadsocio` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `actividadid` INT NULL,
+  `socioid` INT NULL,
+  `resultado` VARCHAR(45) NULL,
+  `comentarios` MEDIUMTEXT NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE actividadsocio ADD CONSTRAINT fk_actividadsocio_socio FOREIGN KEY (socioid) REFERENCES Socio(id);
+  ALTER TABLE actividadsocio ADD CONSTRAINT fk_actividadsocio_actividad FOREIGN KEY (actividadid) REFERENCES Actividad(id);
+
+  CREATE TABLE `tsf`.`sociobandera` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `socioid` INT NULL,
+  `banderaid` INT NULL,
+  `viajeid` INT NULL,
+  `actividadid` INT NULL,
+  `fecha` DATETIME NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE sociobandera ADD CONSTRAINT fk_sociobandera_bandera FOREIGN KEY (banderaid) REFERENCES Pancarta(id);
+  ALTER TABLE sociobandera ADD CONSTRAINT fk_sociobandera_viaje FOREIGN KEY (viajeid) REFERENCES Viaje(id);
+  ALTER TABLE sociobandera ADD CONSTRAINT fk_sociobandera_socio FOREIGN KEY (socioid) REFERENCES Socio(id);
+  ALTER TABLE sociobandera ADD CONSTRAINT fk_sociobandera_actividad FOREIGN KEY (actividadid) REFERENCES Actividad(id);
