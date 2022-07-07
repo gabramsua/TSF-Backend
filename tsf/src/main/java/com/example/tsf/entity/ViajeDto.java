@@ -1,13 +1,17 @@
 package com.example.tsf.entity;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -30,6 +34,13 @@ public class ViajeDto {
     @OneToOne
     @JoinColumn(name = "cartelid", updatable = true, nullable = true)
     private FotoDto foto;
+    
+
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
+    private Set<SocioViajeDto> socioviaje = new HashSet<>();
+
+    @OneToMany(mappedBy = "publico", cascade = CascadeType.ALL)
+    private Set<PublicoViajeDto> publicoviaje = new HashSet<>();
     
 
     private Timestamp fecha;
