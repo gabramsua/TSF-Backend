@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +19,9 @@ public class EquipoDto {
 
     private String nombre, estadio;
     private Integer distancia;
+
+    @OneToOne(mappedBy = "equipo")
+    private ViajeDto viaje;
     
 	public EquipoDto() {}
     

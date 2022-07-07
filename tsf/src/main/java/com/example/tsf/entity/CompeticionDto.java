@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +20,9 @@ public class CompeticionDto {
     private String nombre, ronda;
     // TODO: Revisar esto de la ronda porque no cuadra bien...
 
+    @OneToOne(mappedBy = "competicion")
+    private ViajeDto viaje;
+    
 	public CompeticionDto() {}
 
 	public CompeticionDto(Long id, String nombre, String ronda) {
