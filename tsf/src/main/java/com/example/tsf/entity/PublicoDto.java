@@ -25,6 +25,9 @@ public class PublicoDto {
     @OneToMany(mappedBy = "publico", cascade = CascadeType.ALL)
     private Set<PublicoViajeDto> publicoviaje;
 
+    @OneToMany(mappedBy = "publico", cascade = CascadeType.ALL)
+    private Set<AmigoDto> amigo;
+
 	public PublicoDto() {
 	}
 

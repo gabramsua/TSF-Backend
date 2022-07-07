@@ -20,7 +20,6 @@ public class PublicoViajeDto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "publicoid")
     private PublicoDto publico;
