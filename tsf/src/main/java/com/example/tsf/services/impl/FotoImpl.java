@@ -17,6 +17,8 @@ import com.example.tsf.exception.ResourceNotFoundException;
 import com.example.tsf.repositories.FotoRepository;
 import com.example.tsf.services.interfaces.IFoto;
 
+import Utils.Helpers;
+
 @Service
 public class FotoImpl implements IFoto {
 
@@ -27,6 +29,7 @@ public class FotoImpl implements IFoto {
 	private FotoRepository itemRepository;
 
 	private String entity="Foto", field="id";
+	public Helpers helpers;
 	
 
     @Override
@@ -51,7 +54,7 @@ public class FotoImpl implements IFoto {
 
     @Override
     public FotoDto add(FotoDto itemDto) {
-    	itemDto.setFecha(calculateCurrentTimestamp());
+    	itemDto.setFecha(helpers.calculateCurrentTimestamp());
     	FotoDto res = itemRepository.save(itemDto);
         return res;
     }
@@ -91,11 +94,4 @@ public class FotoImpl implements IFoto {
         return itemRepository.getFotosBetweenDates(date1, date2);
 	}
 	
-	public Timestamp calculateCurrentTimestamp() {
-    	Calendar calendar = Calendar.getInstance();
-        calendar.getTimeInMillis();
-        // TODO: REVISAR ESTO EH
-//      calendar.add(Calendar.HOUR, 2);
-        return new Timestamp(calendar.getTimeInMillis());
-	}
 }

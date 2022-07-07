@@ -16,6 +16,8 @@ import com.example.tsf.exception.ResourceNotFoundException;
 import com.example.tsf.repositories.SocioTemporadaRepository;
 import com.example.tsf.services.interfaces.ISocioTemporada;
 
+import Utils.Helpers;
+
 @Service
 public class SocioTemporadaImpl implements ISocioTemporada{
 
@@ -23,6 +25,7 @@ public class SocioTemporadaImpl implements ISocioTemporada{
 
 	@Autowired
 	private SocioTemporadaRepository itemRepository;
+	public Helpers helpers;
 	
 	private String entity="SocioTemporada", field="id";
 	
@@ -85,18 +88,11 @@ public class SocioTemporadaImpl implements ISocioTemporada{
 
     	aux.setIscuotapagada(true);
     	aux.setMetodopago(metodoPago);
-        aux.setFecha(calculateCurrentTimestamp());
+        aux.setFecha(helpers.calculateCurrentTimestamp());
     	
     	// TODO: insertar elemento en tesoreria
     	return itemRepository.save(aux);
     }
-	public Timestamp calculateCurrentTimestamp() {
-    	Calendar calendar = Calendar.getInstance();
-        calendar.getTimeInMillis();
-        // TODO: REVISAR ESTO EH
-//        calendar.add(Calendar.HOUR, 2);
-        return new Timestamp(calendar.getTimeInMillis());
-	}
     
 
 }
