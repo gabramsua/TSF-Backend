@@ -63,3 +63,9 @@ CREATE TABLE `tsf`.`sociotemporada` (
   `fecharenovacion` datetime DEFAULT NULL,
   `metodopago` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+
+CREATE TABLE `tsf`.`competicion` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  `ronda` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));

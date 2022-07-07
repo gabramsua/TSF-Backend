@@ -9,28 +9,30 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.tsf.entity.CompeticionDto;
 import com.example.tsf.entity.PancartaDto;
 import com.example.tsf.exception.ResourceNotFoundException;
-import com.example.tsf.repositories.PancartaRepository;
-import com.example.tsf.services.interfaces.IPancarta;
+import com.example.tsf.repositories.CompeticionRepository;
+import com.example.tsf.services.interfaces.ICompeticion;
 
 @Service
-public class PancartaImpl implements IPancarta{
+public class CompeticionImpl implements ICompeticion{
 
-	private static final Log LOG = LogFactory.getLog(PancartaImpl.class);
+
+	private static final Log LOG = LogFactory.getLog(CompeticionImpl.class);
 
 	@Autowired
-	private PancartaRepository itemRepository;
+	private CompeticionRepository itemRepository;
 	
-	private String entity="Pancarta", field="id";
+	private String entity="Competicion", field="nombre";
 	
 
     @Override
-    public PancartaDto get(Long id) {
+    public CompeticionDto get(Long id) {
     	if(id <= 0) { throw new IllegalArgumentException("El id no puede ser negativo");}
 
         try {
-            PancartaDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id));
+        	CompeticionDto item = itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id));
             return item;
         } catch (EntityNotFoundException e) {
             throw new EntityNotFoundException();
@@ -38,21 +40,21 @@ public class PancartaImpl implements IPancarta{
     }
 
     @Override
-    public List<PancartaDto> getAll() {
+    public List<CompeticionDto> getAll() {
         return itemRepository.findAll();
     }
 
     @Override
-    public PancartaDto add(PancartaDto itemDto) {
-    	PancartaDto res = itemRepository.save(itemDto);
+    public CompeticionDto add(CompeticionDto itemDto) {
+    	CompeticionDto res = itemRepository.save(itemDto);
         return res;
     }
 
     @Override
-    public PancartaDto update(PancartaDto itemDto) {
+    public CompeticionDto update(CompeticionDto itemDto) {
         LOG.info("update "+entity+itemDto.getNombre());
         try{
-        	PancartaDto res = itemRepository.findById(itemDto.getId()).orElseThrow(() -> new ResourceNotFoundException(entity, field, itemDto.getId()));
+        	CompeticionDto res = itemRepository.findById(itemDto.getId()).orElseThrow(() -> new ResourceNotFoundException(entity, field, itemDto.getNombre()));
         	itemDto.setId(res.getId());
         	return itemRepository.save(itemDto);
         } catch (NullPointerException e){
@@ -67,7 +69,7 @@ public class PancartaImpl implements IPancarta{
     public Boolean remove(Long id) {
         try{
 //        	get(id);
-        	PancartaDto item =	itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id)); 
+        	CompeticionDto item =	itemRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(entity, field, id)); 
             if(!item.equals(null)){
                 itemRepository.delete(item);
                 return Boolean.TRUE;
