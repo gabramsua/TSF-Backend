@@ -20,8 +20,6 @@ public class PancartaDto {
     
     private String nombre, color;
 
-//    @Column(name="idfoto")
-//    @OneToMany(targetEntity=FotoDto.class)
     @OneToOne
     @JoinColumn(name = "fotoid", updatable = true, nullable = true)
     private FotoDto foto;
