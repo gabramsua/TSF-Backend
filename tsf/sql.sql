@@ -69,3 +69,10 @@ CREATE TABLE `tsf`.`competicion` (
   `nombre` VARCHAR(45) NULL,
   `ronda` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+
+CREATE TABLE `tsf`.`equipo` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  `estadio` VARCHAR(45) NULL,
+  `distancia` INT NULL,
+  PRIMARY KEY (`id`));
