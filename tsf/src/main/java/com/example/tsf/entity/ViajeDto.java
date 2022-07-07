@@ -33,7 +33,7 @@ public class ViajeDto {
     
 
     private Timestamp fecha;
-    private Boolean isFinalizado;
+    private Boolean isfinalizado;
     private Integer precioentrada, resultadolocal, resultadovisitante;
     private String comentarios, horasalida, horallegada, lugarsalida;
 	
@@ -42,7 +42,7 @@ public class ViajeDto {
 	}
 
 	public ViajeDto(Long id, EquipoDto equipo, CompeticionDto competicion, FotoDto foto, Timestamp fecha,
-			Boolean isFinalizado, Integer precioentrada, Integer resultadolocal, Integer resultadovisitante,
+			Boolean isfinalizado, Integer precioentrada, Integer resultadolocal, Integer resultadovisitante,
 			String comentarios, String horasalida, String horallegada, String lugarsalida) {
 		super();
 		this.id = id;
@@ -50,7 +50,7 @@ public class ViajeDto {
 		this.competicion = competicion;
 		this.foto = foto;
 		this.fecha = fecha;
-		this.isFinalizado = isFinalizado;
+		this.isfinalizado = isfinalizado;
 		this.precioentrada = precioentrada;
 		this.resultadolocal = resultadolocal;
 		this.resultadovisitante = resultadovisitante;
@@ -101,11 +101,11 @@ public class ViajeDto {
 	}
 
 	public Boolean getIsFinalizado() {
-		return isFinalizado;
+		return isfinalizado;
 	}
 
-	public void setIsFinalizado(Boolean isFinalizado) {
-		this.isFinalizado = isFinalizado;
+	public void setIsFinalizado(Boolean isfinalizado) {
+		this.isfinalizado = isfinalizado;
 	}
 
 	public Integer getPrecioentrada() {
@@ -167,7 +167,7 @@ public class ViajeDto {
 	@Override
 	public String toString() {
 		return "ViajeDto [id=" + id + ", equipo=" + equipo + ", competicion=" + competicion + ", foto=" + foto
-				+ ", fecha=" + fecha + ", isFinalizado=" + isFinalizado + ", precioentrada=" + precioentrada
+				+ ", fecha=" + fecha + ", isfinalizado=" + isfinalizado + ", precioentrada=" + precioentrada
 				+ ", resultadolocal=" + resultadolocal + ", resultadovisitante=" + resultadovisitante + ", comentarios="
 				+ comentarios + ", horasalida=" + horasalida + ", horallegada=" + horallegada + ", lugarsalida="
 				+ lugarsalida + "]";
