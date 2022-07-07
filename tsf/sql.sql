@@ -96,4 +96,40 @@ CREATE TABLE `tsf`.`viaje` (
   ALTER TABLE viaje ADD CONSTRAINT fk_viaje_competicion FOREIGN KEY (competicionid) REFERENCES Competicion(id);
   ALTER TABLE viaje ADD CONSTRAINT fk_viaje_cartel FOREIGN KEY (cartelid) REFERENCES Foto(id);
 
+CREATE TABLE `tsf`.`socioviaje` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `socioid` INT NULL,
+  `viajeid` INT NULL,
+  `ispagadobus` TINYINT NULL,
+  `isentradapedida` TINYINT NULL,
+  `istieneentrada` TINYINT NULL,
+  `isentradapagada` TINYINT NULL,
+  `islistanegra` TINYINT NULL,
+  `comentarios` MEDIUMTEXT NULL,
+  `fecha` DATETIME NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE socioviaje ADD CONSTRAINT fk_socio_viaje FOREIGN KEY (socioid) REFERENCES Socio(id);
+  ALTER TABLE socioviaje ADD CONSTRAINT fk_viaje_socio FOREIGN KEY (viajeid) REFERENCES Viaje(id);
 
+CREATE TABLE `tsf`.`publicoviaje` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `publicoid` INT NULL,
+  `viajeid` INT NULL,
+  `ispagadobus` TINYINT NULL,
+  `istieneentrada` TINYINT NULL,
+  `islistaespera` TINYINT NULL,
+  `islistanegra` TINYINT NULL,
+  `comentarios` MEDIUMTEXT NULL,
+  `fecha` DATETIME NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE publicoviaje ADD CONSTRAINT fk_publico_viaje FOREIGN KEY (publicoid) REFERENCES Publico(id);
+  ALTER TABLE publicoviaje ADD CONSTRAINT fk_viaje_publico FOREIGN KEY (viajeid) REFERENCES Viaje(id);
+
+CREATE TABLE `tsf`.`amigo` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `socioid` INT NULL,
+  `publicoid` INT NULL,
+  `fecha` DATETIME NULL,
+  PRIMARY KEY (`id`));
+  ALTER TABLE amigo ADD CONSTRAINT fk_publico_amigo FOREIGN KEY (publicoid) REFERENCES Publico(id);
+  ALTER TABLE amigo ADD CONSTRAINT fk_socio_amigo FOREIGN KEY (socioid) REFERENCES Socio(id);
