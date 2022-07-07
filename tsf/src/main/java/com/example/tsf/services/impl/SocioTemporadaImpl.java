@@ -93,7 +93,8 @@ public class SocioTemporadaImpl implements ISocioTemporada{
 	public Timestamp calculateCurrentTimestamp() {
     	Calendar calendar = Calendar.getInstance();
         calendar.getTimeInMillis();
-        calendar.add(Calendar.HOUR, 2);
+        // TODO: REVISAR ESTO EH
+//        calendar.add(Calendar.HOUR, 2);
         return new Timestamp(calendar.getTimeInMillis());
 	}
     
