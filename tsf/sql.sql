@@ -184,3 +184,14 @@ CREATE TABLE `tsf`.`actividad` (
   ALTER TABLE sociobandera ADD CONSTRAINT fk_sociobandera_viaje FOREIGN KEY (viajeid) REFERENCES Viaje(id);
   ALTER TABLE sociobandera ADD CONSTRAINT fk_sociobandera_socio FOREIGN KEY (socioid) REFERENCES Socio(id);
   ALTER TABLE sociobandera ADD CONSTRAINT fk_sociobandera_actividad FOREIGN KEY (actividadid) REFERENCES Actividad(id);
+
+CREATE TABLE `tsf`.`cargojunta` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `puesto` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+CREATE TABLE `tsf`.`categoria` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+

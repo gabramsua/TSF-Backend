@@ -17,42 +17,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.tsf.entity.CompeticionDto;
+import com.example.tsf.entity.CategoriaDto;
 import com.example.tsf.exception.ResourceNotFoundException;
-import com.example.tsf.services.interfaces.ICompeticion;
+import com.example.tsf.services.interfaces.ICategoria;
 
 @RestController
-@RequestMapping("/api/competicion")
-public class CompeticionController {
+@RequestMapping("/api/categoria")
+public class CategoriaController {
 
 	@Autowired
-	private ICompeticion service;
-	private static final Log LOG = LogFactory.getLog(CompeticionController.class);
+	private ICategoria service;
+	private static final Log LOG = LogFactory.getLog(CategoriaController.class);
 	
-	private String entity = "Competicion";
+	private String entity = "Categoria";
     
     @GetMapping("/{id}")
-    public CompeticionDto get(
+    public CategoriaDto get(
             @PathVariable("id") Long id){
         LOG.info("Get "+entity+" con id: "+id);
         return service.get(id);
     }
 
     @GetMapping
-    public List<CompeticionDto> getAll(){
+    public List<CategoriaDto> getAll(){
         LOG.info("getAll"+entity);
         return service.getAll();
     }
 
     @PostMapping
-    public CompeticionDto save(@RequestBody CompeticionDto itemDto){
+    public CategoriaDto save(@RequestBody CategoriaDto itemDto){
         LOG.info("Guardando "+entity+": "+itemDto.toString());
         return service.add(itemDto);
     }
 
     @RequestMapping(method = RequestMethod.PUT)
     @PutMapping
-    public CompeticionDto update(@RequestBody CompeticionDto itemDto){
+    public CategoriaDto update(@RequestBody CategoriaDto itemDto){
         LOG.info("Actualizando "+entity+": "+itemDto);
         try {
         	return service.update(itemDto);
