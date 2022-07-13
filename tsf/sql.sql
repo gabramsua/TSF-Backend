@@ -195,3 +195,13 @@ CREATE TABLE `tsf`.`categoria` (
   `nombre` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
 
+CREATE TABLE `tsf`.`reunion` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `temporadaid` INT NULL,
+  `fecha` DATETIME NULL,
+  `lugar` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+ALTER TABLE reunion ADD CONSTRAINT fk_reunion_temproada FOREIGN KEY (temporadaid) REFERENCES Temporada(id);
+
+
+
