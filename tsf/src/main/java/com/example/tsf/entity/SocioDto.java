@@ -1,6 +1,7 @@
 package com.example.tsf.entity;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -36,6 +37,12 @@ public class SocioDto {
 
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
     private Set<AmigoDto> amigo;
+
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
+    private Set<ActividadSocioDto> actividadsocio = new HashSet<>();
+
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL)
+    private Set<SocioBanderaDto> sociobandera;
     
     public SocioDto() {}
 

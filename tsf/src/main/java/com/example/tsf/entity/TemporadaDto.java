@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +28,9 @@ public class TemporadaDto {
 
     @OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
     private Set<SocioTemporadaDto> sociotemporada = new HashSet<>();
+    
+    @OneToOne(mappedBy = "temporada")
+    private ActividadDto actividad;
     
     public TemporadaDto() {}
 
